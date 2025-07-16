@@ -11,6 +11,8 @@ A modern, responsive food delivery application built with React and styled with 
   - Delivery time estimates
   - High-quality restaurant images
 - **Search Functionality**: Search for your favorite restaurants
+- **Filter by Rating**: Filter restaurants to show only top-rated ones (4.5+ stars)
+- **Dynamic State Management**: Real-time filtering with React hooks
 - **Responsive Design**: Optimized for all device sizes
 - **Modern UI**: Clean and intuitive user interface with Tailwind CSS
 
@@ -78,9 +80,12 @@ npm run dev
 - Responsive design with proper spacing
 
 ### Body Component
-- Search bar for restaurant filtering
-- Restaurant container displaying all available restaurants
+- Search bar for restaurant filtering (search functionality)
+- **Top Rated Restaurant Filter**: Button to filter restaurants with 4.5+ star ratings
+- **State Management**: Uses React useState hook to manage restaurant list dynamically
+- Restaurant container displaying filtered restaurants
 - Maps through restaurant data to render individual cards
+- Responsive layout with search and filter controls
 
 ### RestaurantCard Component
 - Displays restaurant image, name, and key details

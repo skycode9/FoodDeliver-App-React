@@ -15,15 +15,27 @@
  *    - Links
  */
 
-import Header from "./components/Header";
-import Body from "./components/Body";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Body from "./pages/Body";
+import MainLayout from "./layouts/MainLayout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
-    <div className="container mx-auto px-3">
-      <Header />
-      <Body />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Body />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

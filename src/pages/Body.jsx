@@ -51,9 +51,9 @@ const Body = () => {
   ) : (
     <>
       <div className="mt-5">
-        <div className="w-full flex justify-between">
+        <div className="w-full flex flex-col sm:flex-row sm:justify-end gap-4">
           {/* search bar */}
-          <div className="w-10 flex">
+          <div className="min-w">
             <input
               className="border p-2 rounded"
               type="text"
@@ -93,7 +93,7 @@ const Body = () => {
         </div>
 
         {/* restaurant container */}
-        <div className="mw-full mt-5 flex flex-wrap">
+        <div className="w-full mt-5 flex flex-wrap justify-center">
           {listOfRestaurant.length === 0 ? (
             <div className="w-full text-center py-10">
               <h2 className="text-2xl text-gray-600">

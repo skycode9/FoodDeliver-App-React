@@ -5,13 +5,13 @@ import Footer from "../components/Footer";
 const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="container mx-auto px-3 flex-1 flex flex-col">
+      <div className="container mx-auto px-3 flex-grow">
         <Header />
-        <main className="flex-1">
+        <main>
           <Outlet />
         </main>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

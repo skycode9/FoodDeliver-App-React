@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import restList from "../utils/mockData";
 import RestaurantCard from "./RestaurantCard";
 
 const Body = () => {
-  const [listOfRestaurant, setlistOfRestaurant] = useState(restList);
+  const [listOfRestaurant, setlistOfRestaurant] = useState([]);
+
   const handleTopRatedRestauranr = () => {
     const filteredRestaurant = listOfRestaurant.filter(
       (res) => res?.info?.avgRating > 4.5
     );
     setlistOfRestaurant(filteredRestaurant);
   };
+
+  const fetchData = async () => {
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+
+      const json = await data.json();
+      const restaurantData =
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      setlistOfRestaurant(restaurantData);
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="mt-5">

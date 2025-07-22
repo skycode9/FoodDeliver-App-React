@@ -1,69 +1,96 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ShimmerMenu from "../components/ShimmerMenu";
 import RestaurantHeader from "../components/RestaurantHeader";
-import MenuSearchBar from "../components/MenuSearchBar";
-import MenuContainer from "../components/MenuContainer";
 import { MENU_URL } from "../utils/comman";
+import ShimmerMenu from "../components/ShimmerMenu";
+
+import MenuItem from "../components/MenuItem";
+import MenuTitle from "../components/MenuTitle";
 
 const RestMenu = () => {
   const { restId } = useParams();
-
   const [restInfo, setRestInfo] = useState(null);
-  const [menuInfo, setMenuInfo] = useState([]);
+  const [menuData, setMenuData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(0);
 
-  const fetchData = async () => {
+  const fetchRestMenuData = async () => {
     try {
       setIsLoading(true);
+
       const data = await fetch(MENU_URL + restId);
       const json = await data.json();
-
       console.log(json);
+      const restaurantHeader = json?.data?.cards[2]?.card?.card?.info;
+      console.log(restaurantHeader);
 
-      const restData = json?.data?.cards[2]?.card?.card?.info;
-      const restMenuData =
-        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+      // Extract menu categories
+      const menuCategories =
+        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+          (card) =>
+            card?.card?.card?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        ) || [];
 
-      setRestInfo(restData);
-      setMenuInfo(restMenuData);
+      console.log("Menu Categories:", menuCategories);
+      setMenuData(menuCategories);
+      setRestInfo(restaurantHeader);
 
-      console.log(restMenuData);
+      // Initialize first accordion as open
+      if (menuCategories.length > 0) {
+        setOpenAccordions({ 0: true });
+      }
+
+      setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching restaurant data:", error);
-    } finally {
+      console.log(error);
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchRestMenuData();
   }, [restId]);
 
-  if (isLoading) {
-    return <ShimmerMenu />;
-  }
-
-  if (!restInfo) {
+  if (isLoading || restInfo.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto p-6 text-center">
-        <h2 className="text-2xl text-gray-600">Restaurant not found</h2>
-        <p className="text-gray-500 mt-2">Please try again later</p>
+      <div>
+        <ShimmerMenu />
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <RestaurantHeader restInfo={restInfo} />
-      
-      <MenuSearchBar 
-        searchTerm={searchTerm} 
-        onSearchChange={setSearchTerm} 
-      />
-      
-      <MenuContainer menuInfo={menuInfo} />
+    <div>
+      <div className="max-w-[800px] min-h-[800px] mt-5 mx-auto">
+        <RestaurantHeader restaurantHeaderInfo={restInfo} />
+        <div>
+          <div className="flex justify-center flex-row items-center pt-[32px] px-0 pb-[16px] h-full w-full">
+            <div className="mx-[4px] my-0 tracking-[4px] font-[Gilroy] font-semibold text-[30px] leading-[17px] text-[rgba(2,_6,_12,_0.6)]">
+              Menu
+            </div>
+          </div>
+
+          <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
+
+          <div className="relative">
+            {menuData.map((menu, index) => (
+              <div className="max-w-[800px] mx-auto">
+                <MenuTitle
+                  MenuTitile={menu?.card?.card?.title}
+                  MenuLength={menu?.card?.card?.itemCards?.length}
+                  onClick={() => setIsOpen(index)}
+                />
+                <MenuItem
+                  openStatus={isOpen}
+                  indexData={index}
+                  MenuSubData={menu?.card?.card?.itemCards}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -3,21 +3,18 @@ import { useState } from "react";
 import MenuTitle from "./MenuTitle";
 
 const NestedMenu = ({ Categories, openStatus, indexData }) => {
-  console.log(Categories);
-
   const [isOpen, setIsOpen] = useState(0);
 
   return (
     <div>
       {openStatus === indexData && (
-        <div className="px-4 py-4">
+        <div className="p-4">
           {Categories.map((elem, index) => (
-            <>
+            <div key={elem?.categoryId || index}>
               <MenuTitle
                 MenuTitle={elem?.title}
                 MenuLength={elem?.itemCards?.length}
                 onClick={() => setIsOpen(index)}
-                key={elem?.categoryId || index}
               />
 
               <MenuItem
@@ -25,7 +22,7 @@ const NestedMenu = ({ Categories, openStatus, indexData }) => {
                 indexData={index}
                 MenuSubData={elem?.itemCards}
               />
-            </>
+            </div>
           ))}
         </div>
       )}

@@ -83,7 +83,8 @@ const RestMenu = () => {
                   openStatus={isOpen}
                   indexData={index}
                   MenuSubData={menu?.card?.card?.itemCards}
-                  key={menu?.card?.card?.itemCards.id || index}
+                  key={menu?.card?.card?.itemCards?.id || index}
+                  Categories={menu?.card?.card?.categories}
                 />
               </div>
             ))}

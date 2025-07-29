@@ -9,7 +9,7 @@ const MenuTitle = ({ MenuTitle, MenuLength, onClick }) => {
         onClick={onClick}
       >
         <div>
-          {MenuTitle} ({MenuLength})
+          {MenuTitle} {MenuLength && `(${MenuLength})`}
         </div>
         <div>
           <BsArrowDownSquare />

@@ -6,7 +6,7 @@ import ShimmerMenu from "../components/ShimmerMenu";
 
 import MenuItem from "../components/MenuItem";
 import MenuTitle from "../components/MenuTitle";
-import NestedTitle from "../components/NestedTitle";
+import NestedMenu from "../components/NestedMenu";
 
 const RestMenu = () => {
   const { restId } = useParams();
@@ -73,15 +73,17 @@ const RestMenu = () => {
 
           <div className="relative">
             {menuData.map((menu, index) => (
-              <div className="max-w-[800px] mx-auto">
+              <div
+                className="max-w-[800px] mx-auto"
+                key={menu?.card?.card?.categoryId}
+              >
                 <MenuTitle
                   MenuTitle={menu?.card?.card?.title}
                   MenuLength={menu?.card?.card?.itemCards?.length}
                   onClick={() => setIsOpen(index)}
-                  key={menu?.card?.card?.categoryId || index}
                 />
                 {menu?.card?.card?.categories?.length > 0 ? (
-                  <NestedTitle
+                  <NestedMenu
                     Categories={menu?.card?.card?.categories}
                     openStatus={isOpen}
                     indexData={index}
@@ -91,9 +93,9 @@ const RestMenu = () => {
                     openStatus={isOpen}
                     indexData={index}
                     MenuSubData={menu?.card?.card?.itemCards}
-                    key={menu?.card?.card?.itemCards?.id || index}
                   />
                 )}
+                <div className="h-[16px] border-b-[16px_solid_rgba(2,_6,_12,_.0509803922)]"></div>
               </div>
             ))}
           </div>

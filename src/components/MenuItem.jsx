@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuItem = ({ openStatus, indexData, MenuSubData, Categories }) => {
+const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
   return (
     <div>
       {openStatus === indexData && (

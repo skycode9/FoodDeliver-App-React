@@ -6,6 +6,7 @@ import ShimmerMenu from "../components/ShimmerMenu";
 
 import MenuItem from "../components/MenuItem";
 import MenuTitle from "../components/MenuTitle";
+import NestedTitle from "../components/NestedTitle";
 
 const RestMenu = () => {
   const { restId } = useParams();
@@ -20,9 +21,9 @@ const RestMenu = () => {
 
       const data = await fetch(MENU_URL + restId);
       const json = await data.json();
-      console.log(json);
+      // console.log(json);
       const restaurantHeader = json?.data?.cards[2]?.card?.card?.info;
-      console.log(restaurantHeader);
+      // console.log(restaurantHeader);
 
       // Extract menu categories
       const menuCategories =
@@ -79,13 +80,20 @@ const RestMenu = () => {
                   onClick={() => setIsOpen(index)}
                   key={menu?.card?.card?.categoryId || index}
                 />
-                <MenuItem
-                  openStatus={isOpen}
-                  indexData={index}
-                  MenuSubData={menu?.card?.card?.itemCards}
-                  key={menu?.card?.card?.itemCards?.id || index}
-                  Categories={menu?.card?.card?.categories}
-                />
+                {menu?.card?.card?.categories?.length > 0 ? (
+                  <NestedTitle
+                    Categories={menu?.card?.card?.categories}
+                    openStatus={isOpen}
+                    indexData={index}
+                  />
+                ) : (
+                  <MenuItem
+                    openStatus={isOpen}
+                    indexData={index}
+                    MenuSubData={menu?.card?.card?.itemCards}
+                    key={menu?.card?.card?.itemCards?.id || index}
+                  />
+                )}
               </div>
             ))}
           </div>

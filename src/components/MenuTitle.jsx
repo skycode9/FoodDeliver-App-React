@@ -1,5 +1,7 @@
 import { BsArrowDownSquare } from "react-icons/bs";
 const MenuTitle = ({ MenuTitle, MenuLength, onClick }) => {
+  console.log(MenuTitle);
+
   return (
     <div>
       <div

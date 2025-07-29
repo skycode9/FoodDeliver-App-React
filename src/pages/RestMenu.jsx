@@ -29,17 +29,14 @@ const RestMenu = () => {
         json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
           (card) =>
             card?.card?.card?.["@type"] ===
-            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-        ) || [];
+              "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
+            card?.card?.card?.["@type"] ===
+              "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+        );
 
       console.log("Menu Categories:", menuCategories);
       setMenuData(menuCategories);
       setRestInfo(restaurantHeader);
-
-      // Initialize first accordion as open
-      if (menuCategories.length > 0) {
-        setOpenAccordions({ 0: true });
-      }
 
       setIsLoading(false);
     } catch (error) {
@@ -77,14 +74,16 @@ const RestMenu = () => {
             {menuData.map((menu, index) => (
               <div className="max-w-[800px] mx-auto">
                 <MenuTitle
-                  MenuTitile={menu?.card?.card?.title}
+                  MenuTitle={menu?.card?.card?.title}
                   MenuLength={menu?.card?.card?.itemCards?.length}
                   onClick={() => setIsOpen(index)}
+                  key={menu?.card?.card?.categoryId || index}
                 />
                 <MenuItem
                   openStatus={isOpen}
                   indexData={index}
                   MenuSubData={menu?.card?.card?.itemCards}
+                  key={menu?.card?.card?.itemCards.id || index}
                 />
               </div>
             ))}

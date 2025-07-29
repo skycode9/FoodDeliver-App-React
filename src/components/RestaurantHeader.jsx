@@ -21,8 +21,8 @@ const RestaurantHeader = ({ restaurantHeaderInfo }) => {
         <h1>Order Online</h1>
       </div>
       <div className="px-4 pb-4 rounded-b-[36px] bg-gradient-to-b from-[rgb(255,255,255)] via-[rgb(235,235,242)] to-[rgb(223,223,231)]">
-        <div className="rounded-[20px] border-[1px] border-[solid] border-[rgba(2,6,12,0.15)] bg-[white] [box-shadow:rgba(0,_0,_0,_0.04)_0px_8px_16px_0px]">
-          <div className="bg-[rgb(255,_236,_239)] border-[1px] border-[solid] border-[rgb(255,236,239)] px-[12px] py-[16px] flex items-center rounded-tl-[20px] rounded-tr-[20px]">
+        <div className="rounded-[20px] border-[1px]  border-[rgba(2,6,12,0.15)] bg-[white] [box-shadow:rgba(0,_0,_0,_0.04)_0px_8px_16px_0px]">
+          <div className="bg-[rgb(255,_236,_239)] border-[1px]  border-[rgb(255,236,239)] px-[12px] py-[16px] flex items-center rounded-tl-[20px] rounded-tr-[20px]">
             <h1>Outside the area</h1>
           </div>
           <div className="mb-[12px]"></div>
@@ -34,10 +34,9 @@ const RestaurantHeader = ({ restaurantHeaderInfo }) => {
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"
-                  fill="none"
                   aria-hidden="true"
-                  strokeColor="rgba(2, 6, 12, 0.92)"
-                  fillColor="rgba(2, 6, 12, 0.92)"
+                  stroke="rgba(2, 6, 12, 0.92)"
+                  fill="rgba(2, 6, 12, 0.92)"
                 >
                   <circle
                     cx="10"
@@ -58,8 +57,8 @@ const RestaurantHeader = ({ restaurantHeaderInfo }) => {
                       y2="19"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#21973B"></stop>
-                      <stop offset="1" stop-color="#128540"></stop>
+                      <stop stopColor="#21973B"></stop>
+                      <stop offset="1" stopColor="#128540"></stop>
                     </linearGradient>
                   </defs>
                 </svg>

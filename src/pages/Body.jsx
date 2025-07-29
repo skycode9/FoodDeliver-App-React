@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 import ShimmerContainer from "../components/ShimmerContainer";
 import { Link } from "react-router-dom";
+import Accordion from "../components/Accordion";
 
 const Body = () => {
   // main render
@@ -90,6 +91,10 @@ const Body = () => {
             >
               Top Rated Restaurant
             </button>
+          </div>
+
+          <div>
+            <Accordion />
           </div>
         </div>
 

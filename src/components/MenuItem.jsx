@@ -1,5 +1,3 @@
-import React from "react";
-
 const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
   return (
     <div>

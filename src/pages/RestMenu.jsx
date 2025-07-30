@@ -12,21 +12,24 @@ const RestMenu = () => {
 
   const { restId } = useParams();
   const MenuInfo = useRestaurantMenu(restId);
-  console.log("MenuInfo", MenuInfo);
-  console.log("Type of MenuInfo:", typeof MenuInfo);
-
   const MenuHeaderInfo = MenuInfo?.cards[2]?.card?.card?.info;
-  console.log("MenuInfoHeader", MenuHeaderInfo);
 
-  const MenuCategoryData =
-    MenuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
-      (card) =>
-        card?.card?.card?.["@type"] ===
-          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
-        card?.card?.card?.["@type"] ===
-          "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+  // const MenuCategoryData =
+  //   MenuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+  //     (card) =>
+  //       card?.card?.card?.["@type"] ===
+  //         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
+  //       card?.card?.card?.["@type"] ===
+  //         "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+  //   );
+  const menuCategory =
+    MenuInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+  const MenuCategoryData = menuCategory?.filter((card) => {
+    const type = card?.card?.card?.["@type"];
+    return (
+      type?.endsWith("ItemCategory") || type?.endsWith("NestedItemCategory")
     );
-  console.log("MenuCategoryData", MenuCategoryData);
+  });
 
   if (!MenuInfo || !MenuInfo?.cards || MenuInfo.cards.length === 0) {
     return (

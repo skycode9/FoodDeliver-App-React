@@ -23,6 +23,17 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import RestMenu from "./pages/RestMenu";
+//import Grocery from "./components/Grocery";
+import { lazy, Suspense } from "react";
+import Shimmer from "./components/Shimmer";
+
+// Chunking
+// Code Spliting
+// Dynamic Bundling
+// Lasy Loading
+// Dynamic Import
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
   return (
@@ -34,6 +45,14 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/restaurant/:restId" element={<RestMenu />} />
+          <Route
+            path="/grocery"
+            element={
+              <Suspense fallback={<Shimmer />}>
+                <Grocery />
+              </Suspense>
+            }
+          />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

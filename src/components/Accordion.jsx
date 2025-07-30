@@ -8,7 +8,7 @@ const Accordion = () => {
   };
 
   return (
-    <div style={{ width: "300px", fontFamily: "Arial" }}>
+    <div className="w-[200px]">
       <div
         onClick={toggleAccordion}
         style={{

@@ -1,56 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantHeader from "../components/RestaurantHeader";
-import { MENU_URL } from "../utils/comman";
 import ShimmerMenu from "../components/ShimmerMenu";
-
 import MenuItem from "../components/MenuItem";
 import MenuTitle from "../components/MenuTitle";
 import NestedMenu from "../components/NestedMenu";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestMenu = () => {
-  const { restId } = useParams();
-  const [restInfo, setRestInfo] = useState(null);
-  const [menuData, setMenuData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(0);
 
-  const fetchRestMenuData = async () => {
-    try {
-      setIsLoading(true);
+  const { restId } = useParams();
+  const MenuInfo = useRestaurantMenu(restId);
+  console.log("MenuInfo", MenuInfo);
+  console.log("Type of MenuInfo:", typeof MenuInfo);
 
-      const data = await fetch(MENU_URL + restId);
-      const json = await data.json();
-      // console.log(json);
-      const restaurantHeader = json?.data?.cards[2]?.card?.card?.info;
-      // console.log(restaurantHeader);
+  const MenuHeaderInfo = MenuInfo?.cards[2]?.card?.card?.info;
+  console.log("MenuInfoHeader", MenuHeaderInfo);
 
-      // Extract menu categories
-      const menuCategories =
-        json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
-          (card) =>
-            card?.card?.card?.["@type"] ===
-              "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
-            card?.card?.card?.["@type"] ===
-              "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
-        );
+  const MenuCategoryData =
+    MenuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (card) =>
+        card?.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
+        card?.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+    );
+  console.log("MenuCategoryData", MenuCategoryData);
 
-      console.log("Menu Categories:", menuCategories);
-      setMenuData(menuCategories);
-      setRestInfo(restaurantHeader);
-
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRestMenuData();
-  }, [restId]);
-
-  if (isLoading || restInfo.length === 0) {
+  if (!MenuInfo || !MenuInfo?.cards || MenuInfo.cards.length === 0) {
     return (
       <div>
         <ShimmerMenu />
@@ -61,7 +39,7 @@ const RestMenu = () => {
   return (
     <div>
       <div className="max-w-[800px] min-h-[800px] mt-5 mx-auto">
-        <RestaurantHeader restaurantHeaderInfo={restInfo} />
+        <RestaurantHeader restaurantHeaderInfo={MenuHeaderInfo} />
         <div>
           <div className="flex justify-center flex-row items-center pt-[32px] px-0 pb-[16px] h-full w-full">
             <div className="mx-[4px] my-0 tracking-[4px] font-[Gilroy] font-semibold text-[30px] leading-[17px] text-[rgba(2,_6,_12,_0.6)]">
@@ -72,7 +50,7 @@ const RestMenu = () => {
           <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
 
           <div className="relative">
-            {menuData.map((menu, index) => (
+            {MenuCategoryData.map((menu, index) => (
               <div
                 className="max-w-[800px] mx-auto"
                 key={menu?.card?.card?.categoryId}

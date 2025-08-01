@@ -1,4 +1,3 @@
-import React from "react";
 import { IMAGE_BASE_URL } from "../utils/comman";
 
 const RestaurantCard = ({ restData }) => {
@@ -15,7 +14,7 @@ const RestaurantCard = ({ restData }) => {
         />
         <div className="flex flex-col gap-3">
           <h3 className="font-semibold text-xl">{name}</h3>
-          <h4>{cuisines.join(", ")}</h4>
+          <h4>{cuisines.join(", ") || cuisines[0]}</h4>
           <h4>{avgRating} star</h4>
           <h4>{costForTwo}</h4>
           <h4>{sla?.slaString}</h4>
@@ -23,6 +22,24 @@ const RestaurantCard = ({ restData }) => {
       </div>
     </>
   );
+};
+
+// Higher Order Component
+
+// take input as a - RestaurantCard ===> RestaurantCardPromoted
+
+export const withLabledRestaurantCard = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <span className="absolute m-1 p-3 bg-black text-white rounded">
+          {props?.restData?.aggregatedDiscountInfoV3?.header}{" "}
+          {props?.restData?.aggregatedDiscountInfoV3?.subHeader}
+        </span>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;

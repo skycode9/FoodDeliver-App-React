@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "../components/RestaurantCard";
+import RestaurantCard, {
+  withLabledRestaurantCard,
+} from "../components/RestaurantCard";
 import ShimmerContainer from "../components/ShimmerContainer";
 import { Link } from "react-router-dom";
 import Accordion from "../components/Accordion";
@@ -22,6 +24,9 @@ const Body = () => {
     );
     setlistOfRestaurant(filteredRestaurant);
   };
+
+  // Higher Order Components
+  const RestaurantCardPromoted = withLabledRestaurantCard(RestaurantCard);
 
   const fetchData = async () => {
     try {
@@ -116,7 +121,14 @@ const Body = () => {
                 to={"/restaurant/" + restaurants?.info?.id}
                 key={restaurants?.info?.id}
               >
-                <RestaurantCard restData={restaurants?.info} />
+                {/* if the offer is true then use RestaurantCardPromoted otherwise normal Card */}
+                {restaurants?.info?.aggregatedDiscountInfoV3 &&
+                Object.keys(restaurants?.info?.aggregatedDiscountInfoV3)
+                  .length > 0 ? (
+                  <RestaurantCardPromoted restData={restaurants?.info} />
+                ) : (
+                  <RestaurantCard restData={restaurants?.info} />
+                )}
               </Link>
             ))
           )}

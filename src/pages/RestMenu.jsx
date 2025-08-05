@@ -61,7 +61,9 @@ const RestMenu = () => {
                 <MenuTitle
                   MenuTitle={menu?.card?.card?.title}
                   MenuLength={menu?.card?.card?.itemCards?.length}
-                  onClick={() => setIsOpen(index)}
+                  onClick={() =>
+                    setIsOpen((prev) => (prev === index ? null : index))
+                  }
                 />
                 {menu?.card?.card?.categories?.length > 0 ? (
                   <NestedMenu

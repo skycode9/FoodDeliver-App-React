@@ -1,13 +1,9 @@
 import { MdOutlineStar } from "react-icons/md";
 import { IMAGE_BASE_URL } from "../utils/comman";
-
 import { SiSquare } from "react-icons/si";
-
 import MenuItemDescription from "./MenuItemDescription";
 
 const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
-  console.log("menusubdata", MenuSubData);
-
   return (
     <div>
       {openStatus === indexData && (

@@ -1,8 +1,9 @@
 import { MdOutlineStar } from "react-icons/md";
 import { IMAGE_BASE_URL } from "../utils/comman";
-import { CgSquare } from "react-icons/cg";
-import { BiCheckboxSquare, BiCheckSquare } from "react-icons/bi";
+
 import { SiSquare } from "react-icons/si";
+
+import MenuItemDescription from "./MenuItemDescription";
 
 const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
   console.log("menusubdata", MenuSubData);
@@ -22,7 +23,7 @@ const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
                       <SiSquare className="text-red-800" />
                     )}
                   </div>
-                  <div class="font-gilroy font-semibold text-[18px] leading-[22px] tracking-[-0.45px] text-[rgba(2,6,12,0.75)]">
+                  <div className="font-gilroy font-semibold text-[18px] leading-[22px] tracking-[-0.45px] text-[rgba(2,6,12,0.75)] mt-1">
                     {item?.card?.info?.name}
                   </div>
                   <div className="font-[550] mt-1 text-gray-900">
@@ -34,7 +35,7 @@ const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
                   </div>
                   {item?.card?.info?.ratings?.aggregatedRating?.rating && (
                     <div className="flex gap-0.5 text-sm items-center">
-                      <MdOutlineStar className="text-green-500" />
+                      <MdOutlineStar className="text-green-700" />
                       <div>
                         {item?.card?.info?.ratings?.aggregatedRating?.rating}(
                         {
@@ -47,10 +48,7 @@ const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
                   )}
 
                   <div className="mt-2">
-                    {item?.card?.info?.description
-                      .split(" ")
-                      .slice(0, 30)
-                      .join(" ") + "..."}
+                    <MenuItemDescription text={item?.card?.info?.description} />
                   </div>
                 </div>
 

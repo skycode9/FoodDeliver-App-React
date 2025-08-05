@@ -14,8 +14,8 @@ const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
         <div style={{ padding: "10px", backgroundColor: "#fff" }}>
           {MenuSubData?.map((item) => (
             <div key={item?.card?.info?.id}>
-              <div className="flex justify-between">
-                <div className="w-[600px]">
+              <div className="flex justify-between min-h-[12rem]">
+                <div className="w-[573px]">
                   <div className="" aria-hidden={true}>
                     {item?.card?.info?.isVeg ? (
                       <SiSquare className="text-green-800" />
@@ -52,12 +52,15 @@ const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
                   </div>
                 </div>
 
-                <div>
+                <div className="relative">
                   <img
                     src={IMAGE_BASE_URL + item?.card?.info?.imageId}
                     alt=""
                     className="rounded-[12px] w-[156px] h-[144px] object-cover"
                   />
+                  <button className="px-10 py-2.5 text-base font-bold bg-white text-green-600 rounded-lg shadow-lg border border-gray-200 absolute bottom-2 left-1/2 transform -translate-x-1/2 hover:bg-green-50 hover:shadow-xl transition-all duration-200 uppercase tracking-wide cursor-pointer">
+                    ADD
+                  </button>
                 </div>
               </div>
               <div className="border-b border-gray-300 h-px my-5"></div>

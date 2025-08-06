@@ -15,7 +15,7 @@ const MainLayout = () => {
     setUserName(data.name);
   }, []);
   return (
-    <UserContext.Provider value={{ loggedInUser: userName }}>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
       <div className="min-h-screen flex flex-col">
         <div className="container mx-auto px-3 flex-grow">
           <Header />

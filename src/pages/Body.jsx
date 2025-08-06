@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RestaurantCard, {
   withLabledRestaurantCard,
 } from "../components/RestaurantCard";
 import ShimmerContainer from "../components/ShimmerContainer";
 import { Link } from "react-router-dom";
 import Accordion from "../components/Accordion";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // main render
@@ -53,6 +54,8 @@ const Body = () => {
     fetchData();
   }, []);
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   // Conditional Rendering
   return isLoading ? (
     <ShimmerContainer />
@@ -88,6 +91,14 @@ const Body = () => {
               }}
             />
           </div>
+
+          {/* value change in UserContext terms of Context update */}
+          <input
+            className="border p-2 rounded"
+            placeholder="UserName"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
 
           {/* Top Restaurant Filter */}
           <div>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/comman";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { FcOk, FcCancel } from "react-icons/fc";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [show, setShow] = useState(true);
@@ -10,6 +11,8 @@ const Header = () => {
   const handleChangeBtn = () => {
     setShow((prev) => !prev);
   };
+  const { loggedInUser } = useContext(UserContext);
+
   return (
     <>
       <div className="flex justify-between p-3 items-center border mt-1">
@@ -31,6 +34,10 @@ const Header = () => {
           </li>
           <li>
             <Link to="/cart">Cart</Link>
+          </li>
+          <li>
+            <span>User: </span>
+            <span className="font-semibold">{loggedInUser}</span>
           </li>
           <li>
             <div

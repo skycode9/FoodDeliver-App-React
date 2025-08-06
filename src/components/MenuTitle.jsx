@@ -1,10 +1,13 @@
 import { BsArrowDownSquare } from "react-icons/bs";
-const MenuTitle = ({ MenuTitle, MenuLength, onClick }) => {
+const MenuTitle = ({ MenuTitle, MenuLength, setIsOpen }) => {
+  const handleClick = () => {
+    setIsOpen();
+  };
   return (
     <div>
       <div
         className="flex justify-between items-center bg-gray-500 text-white px-2 cursor-pointer"
-        onClick={onClick}
+        onClick={handleClick}
       >
         <div>
           {MenuTitle} {MenuLength && `(${MenuLength})`}

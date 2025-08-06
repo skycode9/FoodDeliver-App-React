@@ -3,10 +3,10 @@ import { IMAGE_BASE_URL } from "../utils/comman";
 import { SiSquare } from "react-icons/si";
 import MenuItemDescription from "./MenuItemDescription";
 
-const MenuItem = ({ openStatus, indexData, MenuSubData }) => {
+const MenuItem = ({ MenuSubData, showItems, setIsOpen }) => {
   return (
     <div>
-      {openStatus === indexData && (
+      {showItems && (
         <div style={{ padding: "10px", backgroundColor: "#fff" }}>
           {MenuSubData?.map((item) => (
             <div key={item?.card?.info?.id}>

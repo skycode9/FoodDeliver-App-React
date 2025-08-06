@@ -2,24 +2,25 @@ import MenuItem from "./MenuItem";
 import { useState } from "react";
 import MenuTitle from "./MenuTitle";
 
-const NestedMenu = ({ Categories, openStatus, indexData }) => {
+const NestedMenu = ({ Categories, showItems }) => {
   const [isOpen, setIsOpen] = useState(0);
 
   return (
     <div>
-      {openStatus === indexData && (
+      {showItems && (
         <div className="p-4">
           {Categories.map((elem, index) => (
-            <div key={elem?.categoryId || index}>
+            <div key={elem?.categoryId || index} className="mb-2">
               <MenuTitle
                 MenuTitle={elem?.title}
                 MenuLength={elem?.itemCards?.length}
-                onClick={() => setIsOpen(index)}
+                setIsOpen={() =>
+                  setIsOpen((prev) => (prev === index ? null : index))
+                }
               />
 
               <MenuItem
-                openStatus={isOpen}
-                indexData={index}
+                showItems={index === isOpen ? true : false}
                 MenuSubData={elem?.itemCards}
               />
             </div>

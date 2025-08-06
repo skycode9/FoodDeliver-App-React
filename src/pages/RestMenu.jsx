@@ -61,20 +61,21 @@ const RestMenu = () => {
                 <MenuTitle
                   MenuTitle={menu?.card?.card?.title}
                   MenuLength={menu?.card?.card?.itemCards?.length}
-                  onClick={() =>
+                  // onClick={() =>
+                  //   setIsOpen((prev) => (prev === index ? null : index))
+                  // }
+                  setIsOpen={() =>
                     setIsOpen((prev) => (prev === index ? null : index))
                   }
                 />
                 {menu?.card?.card?.categories?.length > 0 ? (
                   <NestedMenu
                     Categories={menu?.card?.card?.categories}
-                    openStatus={isOpen}
-                    indexData={index}
+                    showItems={index === isOpen ? true : false}
                   />
                 ) : (
                   <MenuItem
-                    openStatus={isOpen}
-                    indexData={index}
+                    showItems={index === isOpen ? true : false}
                     MenuSubData={menu?.card?.card?.itemCards}
                   />
                 )}

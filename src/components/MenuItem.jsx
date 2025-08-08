@@ -44,7 +44,9 @@ const MenuItem = ({ MenuSubData, showItems, setIsOpen }) => {
                   )}
 
                   <div className="mt-2">
-                    <MenuItemDescription text={item?.card?.info?.description} />
+                    <MenuItemDescription
+                      text={item?.card?.info?.description || ""}
+                    />
                   </div>
                 </div>
 

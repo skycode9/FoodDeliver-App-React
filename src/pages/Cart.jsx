@@ -1,6 +1,7 @@
 import MenuItem from "../components/MenuItem";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
+import CartItems from "../components/CartItems";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -30,7 +31,8 @@ const Cart = () => {
             <div className="text-center">There is no items in cart...</div>
           )}
 
-          <MenuItem MenuSubData={cartItems} showItems={true} />
+          {/* <MenuItem MenuSubData={cartItems} showItems={true} /> */}
+          <CartItems items={cartItems} />
         </div>
       </div>
     </div>

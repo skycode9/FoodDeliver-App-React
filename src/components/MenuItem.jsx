@@ -2,8 +2,16 @@ import { MdOutlineStar } from "react-icons/md";
 import { IMAGE_BASE_URL } from "../utils/comman";
 import { SiSquare } from "react-icons/si";
 import MenuItemDescription from "./MenuItemDescription";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const MenuItem = ({ MenuSubData, showItems, setIsOpen }) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    // disptch the action
+    dispatch(addItem(item));
+  };
+
   return (
     <div>
       {showItems && (
@@ -56,7 +64,10 @@ const MenuItem = ({ MenuSubData, showItems, setIsOpen }) => {
                     alt=""
                     className="rounded-[12px] w-[156px] h-[144px] object-cover"
                   />
-                  <button className="px-10 py-2.5 text-base font-bold bg-white text-green-600 rounded-lg shadow-lg border border-gray-200 absolute bottom-2 left-1/2 transform -translate-x-1/2 hover:bg-green-50 hover:shadow-xl transition-all duration-200 uppercase tracking-wide cursor-pointer">
+                  <button
+                    className="px-10 py-2.5 text-base font-bold bg-white text-green-600 rounded-lg shadow-lg border border-gray-200 absolute bottom-2 left-1/2 transform -translate-x-1/2 hover:bg-green-50 hover:shadow-xl transition-all duration-200 uppercase tracking-wide cursor-pointer"
+                    onClick={() => handleAddItem(item)}
+                  >
                     ADD
                   </button>
                 </div>

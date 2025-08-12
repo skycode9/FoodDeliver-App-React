@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { FcOk, FcCancel } from "react-icons/fc";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [show, setShow] = useState(true);
@@ -12,6 +13,10 @@ const Header = () => {
     setShow((prev) => !prev);
   };
   const { loggedInUser } = useContext(UserContext);
+
+  // subscribing the store using useSelector
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <>
@@ -33,7 +38,11 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">
+              <span className="text-xl font-[550]">
+                Cart - ({cartItems.length} items)
+              </span>
+            </Link>
           </li>
           <li>
             <span>User: </span>

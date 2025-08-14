@@ -119,12 +119,27 @@ const Body = () => {
         <div className="w-full mt-5 flex flex-wrap justify-center">
           {listOfRestaurant.length === 0 ? (
             <div className="w-full text-center py-10">
-              <h2 className="text-2xl text-gray-600">
-                No restaurants found matching your search
-              </h2>
-              <p className="text-gray-500 mt-2">
-                Try searching with different keywords
-              </p>
+              {filteredRestaurant.length === 0 ? (
+                // No data from API
+                <>
+                  <h2 className="text-2xl text-gray-600">
+                    Unable to load restaurants
+                  </h2>
+                  <p className="text-gray-500 mt-2">
+                    Please check your internet connection and try again
+                  </p>
+                </>
+              ) : (
+                // Data exists but search/filter returned no results
+                <>
+                  <h2 className="text-2xl text-gray-600">
+                    No restaurants found matching your search
+                  </h2>
+                  <p className="text-gray-500 mt-2">
+                    Try searching with different keywords
+                  </p>
+                </>
+              )}
             </div>
           ) : (
             listOfRestaurant.map((restaurants) => (

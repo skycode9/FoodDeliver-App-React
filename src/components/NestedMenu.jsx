@@ -2,7 +2,7 @@ import MenuItem from "./MenuItem";
 import { useState } from "react";
 import MenuTitle from "./MenuTitle";
 
-const NestedMenu = ({ Categories, showItems }) => {
+const NestedMenu = ({ Categories, showItems, isVegOn, isNonVegOn }) => {
   const [isOpen, setIsOpen] = useState(0);
 
   return (
@@ -22,6 +22,8 @@ const NestedMenu = ({ Categories, showItems }) => {
               <MenuItem
                 showItems={index === isOpen ? true : false}
                 MenuSubData={elem?.itemCards}
+                isVegOn={isVegOn}
+                isNonVegOn={isNonVegOn}
               />
             </div>
           ))}

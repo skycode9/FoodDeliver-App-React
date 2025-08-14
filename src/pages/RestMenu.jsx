@@ -6,7 +6,6 @@ import MenuItem from "../components/MenuItem";
 import MenuTitle from "../components/MenuTitle";
 import NestedMenu from "../components/NestedMenu";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import VegNonVegToggle from "../components/VegNonVegToggle";
 import ToggleBtn from "../components/ToggleBtn";
 
 const RestMenu = () => {
@@ -33,8 +32,17 @@ const RestMenu = () => {
     );
   });
 
-  const [isVegOn, setIsVegOn] = useState(false);
-  const [isNonVegOn, setIsNonVegOn] = useState(false);
+  console.log("menucate", MenuCategoryData);
+
+  const [selected, setSelected] = useState(null);
+
+  const handleVegToggle = () => {
+    setSelected((prev) => (prev === "VEG" ? null : "VEG"));
+  };
+
+  const handleNonVegToggle = () => {
+    setSelected((prev) => (prev === "NONVEG" ? null : "NONVEG"));
+  };
 
   if (!MenuInfo || !MenuInfo?.cards || MenuInfo.cards.length === 0) {
     return (
@@ -56,15 +64,15 @@ const RestMenu = () => {
           </div>
           <div className="flex space-x-6 pt-3">
             <ToggleBtn
-              isOn={isVegOn}
+              isOn={selected === "VEG"}
               lable="Veg"
-              onToggle={() => setIsVegOn((prev) => !prev)}
+              onToggle={handleVegToggle}
               onColor="bg-green-400"
             />
             <ToggleBtn
-              isOn={isNonVegOn}
+              isOn={selected === "NONVEG"}
               lable="Non-Veg"
-              onToggle={() => setIsNonVegOn((prev) => !prev)}
+              onToggle={handleNonVegToggle}
               onColor="bg-red-400"
             />
           </div>
@@ -80,9 +88,6 @@ const RestMenu = () => {
                 <MenuTitle
                   MenuTitle={menu?.card?.card?.title}
                   MenuLength={menu?.card?.card?.itemCards?.length}
-                  // onClick={() =>
-                  //   setIsOpen((prev) => (prev === index ? null : index))
-                  // }
                   setIsOpen={() =>
                     setIsOpen((prev) => (prev === index ? null : index))
                   }
@@ -91,11 +96,13 @@ const RestMenu = () => {
                   <NestedMenu
                     Categories={menu?.card?.card?.categories}
                     showItems={index === isOpen ? true : false}
+                    selected={selected}
                   />
                 ) : (
                   <MenuItem
                     showItems={index === isOpen ? true : false}
                     MenuSubData={menu?.card?.card?.itemCards}
+                    selected={selected}
                   />
                 )}
                 <div className="h-[16px] border-b-[16px_solid_rgba(2,_6,_12,_.0509803922)]"></div>

@@ -5,18 +5,28 @@ import MenuItemDescription from "./MenuItemDescription";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
 
-const MenuItem = ({ MenuSubData, showItems, setIsOpen }) => {
+const MenuItem = ({ MenuSubData, showItems, isVegOn, isNonVegOn }) => {
   const dispatch = useDispatch();
   const handleAddItem = (item) => {
     // disptch the action
     dispatch(addItem(item));
   };
 
+  const filteredItems = MenuSubData.filter((item) => {
+    const vegStatus = item?.card?.info?.itemAttribute?.vegClassifier;
+
+    if (!isVegOn && !isNonVegOn) return true; // No filter applied
+
+    return (
+      (isVegOn && vegStatus === "VEG") || (isNonVegOn && vegStatus === "NONVEG")
+    );
+  });
+
   return (
     <div>
       {showItems && (
         <div style={{ padding: "10px", backgroundColor: "#fff" }}>
-          {MenuSubData?.map((item) => (
+          {filteredItems?.map((item) => (
             <div key={item?.card?.info?.id}>
               <div className="flex justify-between min-h-[12rem]">
                 <div className="w-[573px]">

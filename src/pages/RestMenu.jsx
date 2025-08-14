@@ -6,6 +6,7 @@ import MenuItem from "../components/MenuItem";
 import MenuTitle from "../components/MenuTitle";
 import NestedMenu from "../components/NestedMenu";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import VegNonVegToggle from "../components/VegNonVegToggle";
 
 const RestMenu = () => {
   const [isOpen, setIsOpen] = useState(0);
@@ -49,6 +50,8 @@ const RestMenu = () => {
               Menu
             </div>
           </div>
+
+          <VegNonVegToggle />
 
           <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
 

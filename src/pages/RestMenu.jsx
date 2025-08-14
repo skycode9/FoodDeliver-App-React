@@ -7,6 +7,7 @@ import MenuTitle from "../components/MenuTitle";
 import NestedMenu from "../components/NestedMenu";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import VegNonVegToggle from "../components/VegNonVegToggle";
+import ToggleBtn from "../components/ToggleBtn";
 
 const RestMenu = () => {
   const [isOpen, setIsOpen] = useState(0);
@@ -32,6 +33,9 @@ const RestMenu = () => {
     );
   });
 
+  const [isVegOn, setIsVegOn] = useState(false);
+  const [isNonVegOn, setIsNonVegOn] = useState(false);
+
   if (!MenuInfo || !MenuInfo?.cards || MenuInfo.cards.length === 0) {
     return (
       <div>
@@ -50,8 +54,20 @@ const RestMenu = () => {
               Menu
             </div>
           </div>
-
-          <VegNonVegToggle />
+          <div className="flex space-x-6 pt-3">
+            <ToggleBtn
+              isOn={isVegOn}
+              lable="Veg"
+              onToggle={() => setIsVegOn((prev) => !prev)}
+              onColor="bg-green-400"
+            />
+            <ToggleBtn
+              isOn={isNonVegOn}
+              lable="Non-Veg"
+              onToggle={() => setIsNonVegOn((prev) => !prev)}
+              onColor="bg-red-400"
+            />
+          </div>
 
           <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
 

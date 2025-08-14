@@ -43,6 +43,47 @@ const RestMenu = () => {
     setSelected((prev) => (prev === "NONVEG" ? null : "NONVEG"));
   };
 
+  // Simple function to check if any items exist for selected filter
+  const checkIfItemsExist = () => {
+    if (!selected) return true; // No filter applied
+    
+    let hasItems = false;
+    
+    for (let i = 0; i < MenuCategoryData.length; i++) {
+      const menu = MenuCategoryData[i];
+      
+      if (menu?.card?.card?.categories) {
+        // Check nested categories
+        for (let j = 0; j < menu.card.card.categories.length; j++) {
+          const category = menu.card.card.categories[j];
+          const items = category?.itemCards || [];
+          
+          for (let k = 0; k < items.length; k++) {
+            const item = items[k];
+            if (item?.card?.info?.itemAttribute?.vegClassifier === selected) {
+              hasItems = true;
+              break;
+            }
+          }
+          if (hasItems) break;
+        }
+      } else {
+        // Check regular menu items
+        const items = menu?.card?.card?.itemCards || [];
+        for (let j = 0; j < items.length; j++) {
+          const item = items[j];
+          if (item?.card?.info?.itemAttribute?.vegClassifier === selected) {
+            hasItems = true;
+            break;
+          }
+        }
+      }
+      if (hasItems) break;
+    }
+    
+    return hasItems;
+  };
+
   if (!MenuInfo || !MenuInfo?.cards || MenuInfo.cards.length === 0) {
     return (
       <div>
@@ -79,6 +120,27 @@ const RestMenu = () => {
           <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
 
           <div className="relative">
+            {/* Show message if no items found for selected filter */}
+            {selected && !checkIfItemsExist() && (
+              <div className="flex flex-col items-center justify-center py-16 px-4">
+                <div className="text-6xl mb-4">
+                  {selected === "VEG" ? "🥬" : "🍖"}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                  {selected === "VEG" ? "No Vegetarian Items" : "No Non-Vegetarian Items"}
+                </h3>
+                <p className="text-gray-500 text-center max-w-md">
+                  {selected === "VEG" 
+                    ? "This restaurant doesn't have any vegetarian dishes available." 
+                    : "This restaurant doesn't have any non-vegetarian dishes available."
+                  }
+                </p>
+                <p className="text-sm text-gray-400 mt-2">
+                  Try switching to {selected === "VEG" ? "Non-Veg" : "Veg"} or clear the filter.
+                </p>
+              </div>
+            )}
+
             {MenuCategoryData.map((menu, index) => {
               // Check if it's a nested menu
               const isNestedMenu = menu?.card?.card?.categories?.length > 0;

@@ -34,12 +34,11 @@ const RestMenu = () => {
 
   console.log("menucate", MenuCategoryData);
 
+  // Veg-NonVeg Toggle
   const [selected, setSelected] = useState(null);
-
   const handleVegToggle = () => {
     setSelected((prev) => (prev === "VEG" ? null : "VEG"));
   };
-
   const handleNonVegToggle = () => {
     setSelected((prev) => (prev === "NONVEG" ? null : "NONVEG"));
   };
@@ -80,34 +79,85 @@ const RestMenu = () => {
           <div className="h-[0.5px] bg-[rgba(2,_6,_12,_0.15)] w-[calc(100% - 32px)] mx-[auto] my-[24px]" />
 
           <div className="relative">
-            {MenuCategoryData.map((menu, index) => (
-              <div
-                className="max-w-[800px] mx-auto"
-                key={menu?.card?.card?.categoryId}
-              >
-                <MenuTitle
-                  MenuTitle={menu?.card?.card?.title}
-                  MenuLength={menu?.card?.card?.itemCards?.length}
-                  setIsOpen={() =>
-                    setIsOpen((prev) => (prev === index ? null : index))
-                  }
-                />
-                {menu?.card?.card?.categories?.length > 0 ? (
-                  <NestedMenu
-                    Categories={menu?.card?.card?.categories}
-                    showItems={index === isOpen ? true : false}
-                    selected={selected}
+            {MenuCategoryData.map((menu, index) => {
+              // Check if it's a nested menu
+              const isNestedMenu = menu?.card?.card?.categories?.length > 0;
+              
+              if (isNestedMenu) {
+                // For nested menus, check if any category has filtered items
+                const hasFilteredItems = menu?.card?.card?.categories?.some(category => {
+                  const categoryItems = category?.itemCards || [];
+                  const filteredCategoryItems = selected === null
+                    ? categoryItems
+                    : categoryItems.filter(item =>
+                        item?.card?.info?.itemAttribute?.vegClassifier === selected
+                      );
+                  return filteredCategoryItems.length > 0;
+                });
+                
+                if (!hasFilteredItems) return null;
+              } else {
+                // For simple menus
+                const itemCards = menu?.card?.card?.itemCards || [];
+                const filteredData = selected === null
+                  ? itemCards
+                  : itemCards.filter(item =>
+                      item?.card?.info?.itemAttribute?.vegClassifier === selected
+                    );
+                
+                if (!filteredData || filteredData.length === 0) return null;
+              }
+
+              // Calculate menu length for display
+              const menuLength = isNestedMenu 
+                ? menu?.card?.card?.categories?.reduce((total, category) => {
+                    const categoryItems = category?.itemCards || [];
+                    const filteredCategoryItems = selected === null
+                      ? categoryItems
+                      : categoryItems.filter(item =>
+                          item?.card?.info?.itemAttribute?.vegClassifier === selected
+                        );
+                    return total + filteredCategoryItems.length;
+                  }, 0)
+                : (selected === null
+                    ? menu?.card?.card?.itemCards?.length || 0
+                    : menu?.card?.card?.itemCards?.filter(item =>
+                        item?.card?.info?.itemAttribute?.vegClassifier === selected
+                      )?.length || 0);
+
+              return (
+                <div
+                  className="max-w-[800px] mx-auto"
+                  key={menu?.card?.card?.categoryId}
+                >
+                  <MenuTitle
+                    MenuTitle={menu?.card?.card?.title}
+                    MenuLength={menuLength}
+                    setIsOpen={() =>
+                      setIsOpen((prev) => (prev === index ? null : index))
+                    }
                   />
-                ) : (
-                  <MenuItem
-                    showItems={index === isOpen ? true : false}
-                    MenuSubData={menu?.card?.card?.itemCards}
-                    selected={selected}
-                  />
-                )}
-                <div className="h-[16px] border-b-[16px_solid_rgba(2,_6,_12,_.0509803922)]"></div>
-              </div>
-            ))}
+                  {isNestedMenu ? (
+                    <NestedMenu
+                      Categories={menu?.card?.card?.categories}
+                      showItems={index === isOpen ? true : false}
+                      selected={selected}
+                    />
+                  ) : (
+                    <MenuItem
+                      showItems={index === isOpen ? true : false}
+                      MenuSubData={selected === null
+                        ? menu?.card?.card?.itemCards
+                        : menu?.card?.card?.itemCards?.filter(item =>
+                            item?.card?.info?.itemAttribute?.vegClassifier === selected
+                          )}
+                      selected={selected}
+                    />
+                  )}
+                  <div className="h-[16px] border-b-[16px_solid_rgba(2,_6,_12,_.0509803922)]"></div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

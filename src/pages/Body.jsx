@@ -33,19 +33,37 @@ const Body = () => {
     try {
       setIsLoading(true);
 
-      const data = await fetch(
-        "/api/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
-      const json = await data.json();
-      // Optional Chaining
-      const restaurantData =
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      setlistOfRestaurant(restaurantData);
-      setFilteredRestaurant(restaurantData);
-      //console.log("restaurantData", restaurantData);
+      // Try API first, fallback to mock data if fails
+      try {
+        const data = await fetch(
+          "/api/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        );
+        
+        if (!data.ok) {
+          throw new Error('API failed');
+        }
+        
+        const json = await data.json();
+        const restaurantData =
+          json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+            
+        if (restaurantData && restaurantData.length > 0) {
+          setlistOfRestaurant(restaurantData);
+          setFilteredRestaurant(restaurantData);
+          setIsLoading(false);
+          return;
+        }
+      } catch (apiError) {
+        console.log("API failed, using mock data:", apiError);
+      }
 
+      // Fallback to mock data
+      const { default: mockData } = await import("../mocks/RestaurantMockListData.json");
+      setlistOfRestaurant(mockData);
+      setFilteredRestaurant(mockData);
       setIsLoading(false);
+      
     } catch (error) {
       console.log("Something went wrong", error);
       setIsLoading(false);

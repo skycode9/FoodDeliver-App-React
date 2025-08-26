@@ -43,6 +43,8 @@ const Body = () => {
           ?.restaurants;
       setlistOfRestaurant(restaurantData);
       setFilteredRestaurant(restaurantData);
+      console.log("restaurantData", restaurantData);
+
       setIsLoading(false);
     } catch (error) {
       console.log("Something went wrong", error);
@@ -56,6 +58,8 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
+  console.log("listOfRestaurant", listOfRestaurant);
+
   // Conditional Rendering
   return isLoading ? (
     <ShimmerContainer />
@@ -67,6 +71,7 @@ const Body = () => {
           <div className="min-w">
             <input
               className="border p-2 rounded"
+              data-testid="search-input"
               type="text"
               placeholder="Search Restaurant"
               value={serchTxt}

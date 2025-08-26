@@ -1,4 +1,5 @@
 import { IMAGE_BASE_URL } from "../utils/comman";
+import React from "react";
 
 const RestaurantCard = ({ restData }) => {
   const { name, cuisines, avgRating, sla, costForTwo, cloudinaryImageId } =
@@ -6,7 +7,10 @@ const RestaurantCard = ({ restData }) => {
 
   return (
     <>
-      <div className="w-[250px] h-[420px] border border-black p-[5px] bg-gray-100 m-5 cursor-pointer hover:bg-gray-200 mb-4 flex flex-col">
+      <div
+        className="w-[250px] h-[420px] border border-black p-[5px] bg-gray-100 m-5 cursor-pointer hover:bg-gray-200 mb-4 flex flex-col"
+        data-testid="resCard"
+      >
         <img
           src={IMAGE_BASE_URL + cloudinaryImageId}
           alt=""

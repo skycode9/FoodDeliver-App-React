@@ -43,7 +43,7 @@ const Body = () => {
           ?.restaurants;
       setlistOfRestaurant(restaurantData);
       setFilteredRestaurant(restaurantData);
-      console.log("restaurantData", restaurantData);
+      //console.log("restaurantData", restaurantData);
 
       setIsLoading(false);
     } catch (error) {
@@ -58,7 +58,7 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  console.log("listOfRestaurant", listOfRestaurant);
+  //console.log("listOfRestaurant", listOfRestaurant);
 
   // Conditional Rendering
   return isLoading ? (
@@ -86,9 +86,14 @@ const Body = () => {
                   // Filter restaurants based on search input
                   const newFilteredRestaurant = filteredRestaurant.filter(
                     (res) => {
-                      return res.info.name
+                      const nameMatch = res.info.name
                         .toLowerCase()
                         .includes(searchValue.toLowerCase());
+                      const cuisineMatch = res.info.cuisines
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase());
+                      return nameMatch || cuisineMatch;
                     }
                   );
                   setlistOfRestaurant(newFilteredRestaurant);

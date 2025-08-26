@@ -2,6 +2,9 @@
 
 A modern, responsive food delivery application built with React, featuring real-time restaurant data, advanced filtering, cart management, and comprehensive testing suite.
 
+## 🚀 Live Demo
+**[View Live App](https://food-deliver-app-react.vercel.app/)**
+
 ![FoodDeliver App](https://img.shields.io/badge/React-19.1.0-blue.svg)
 ![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-2.8.2-purple.svg)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.11-cyan.svg)

@@ -21,9 +21,9 @@ const Header = () => {
   return (
     <>
       <div className="flex justify-between p-3 items-center border mt-1">
-        <Link to="/">
-          <img src={LOGO_URL} alt="" className="w-24 h-24 object-contain" />
-        </Link>
+        <a href="/" onClick={() => window.location.reload()}>
+          <img src={LOGO_URL} alt="" className="w-24 h-24 object-contain cursor-pointer" />
+        </a>
         <ul className="flex gap-4 text-lg">
           <li>
             <Link to="/">Home</Link>

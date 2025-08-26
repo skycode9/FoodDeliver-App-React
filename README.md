@@ -1,59 +1,184 @@
 # 🍕 FoodDeliver App - React
 
-A modern, responsive food delivery application built with React and styled with Tailwind CSS. Browse restaurants, view their details, and enjoy a seamless food ordering experience with advanced loading states and smooth animations.
+A modern, responsive food delivery application built with React, featuring real-time restaurant data, advanced filtering, cart management, and comprehensive testing suite.
+
+![FoodDeliver App](https://img.shields.io/badge/React-19.1.0-blue.svg)
+![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-2.8.2-purple.svg)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.11-cyan.svg)
+![Vitest](https://img.shields.io/badge/Vitest-3.2.4-green.svg)
+
+## 📱 Screenshots
+
+### Home Page - Restaurant Listings
+
+![Home Page](./screenshots/home-page.png)
+_Browse through various restaurants with search and filter functionality_
+
+### Restaurant Menu - McDonald's
+
+![Restaurant Menu](./screenshots/restaurant-menu.png)
+_Detailed restaurant menu with veg/non-veg filters and item descriptions_
+
+### Accordion Component - Menu Categories
+
+![Accordion Example](./screenshots/accordion-example.png)
+_Collapsible accordion component showing menu categories with expand/collapse functionality_
+
+### Search Functionality - Pizza Results
+
+![Pizza Search](./screenshots/pizza-search.png)
+_Real-time search showing filtered results for "Pizza" - displays 4 matching restaurants instantly_
+
+### NonVeg Filter Active
+
+![NonVeg Filter](./screenshots/NonVeg-filter.png)
+_Smart filtering system to show only non-vegetarian options_
+
+### Shopping Cart
+
+![Shopping Cart](./screenshots/cart.png)
+_Clean cart interface with item management and total calculation_
 
 ## ✨ Features
 
-- **Restaurant Listing**: Browse through a curated list of restaurants with live API data
-- **Restaurant Cards**: View restaurant details including:
-  - Restaurant name and cuisine types
-  - Average rating and cost for two
-  - Delivery time estimates
-  - High-quality restaurant images from Swiggy API
-- **Advanced Search Functionality**: 
-  - Real-time search with instant results
-  - Search by restaurant name with case-insensitive matching
-  - Clear search to restore full restaurant list
-  - "No results found" message for empty searches
-- **Smart Filtering**: Filter restaurants to show only top-rated ones (4.5+ stars)
-- **Loading States**: Beautiful shimmer UI while data loads
-- **Routing**: Multi-page navigation with React Router
-  - Home page with restaurant listings
-  - About page
-  - Contact page
-- **Responsive Design**: Optimized for all device sizes
-- **Modern UI**: Clean and intuitive user interface with Tailwind CSS
-- **Sticky Footer**: Footer always stays at bottom of page
+### 🏠 Core Functionality
+
+- **Real-time Restaurant Data**: Integration with live Swiggy API
+- **Advanced Search**: Search restaurants by name and cuisine
+- **Smart Filtering**: Top-rated restaurants filter (rating > 4.5)
+- **Responsive Design**: Mobile-first approach with TailwindCSS
+- **Online/Offline Status**: Real-time connectivity indicator
+
+### 🍽️ Restaurant & Menu
+
+- **Restaurant Cards**: Display with ratings, cuisine, delivery time, and cost
+- **Detailed Menu**: Categorized menu items with descriptions
+- **Veg/Non-Veg Toggle**: Filter menu items by dietary preferences
+- **Promotional Labels**: HOC-based promoted restaurant cards
+- **Dynamic Routing**: Individual restaurant pages with menu
+
+### 🛒 Shopping Experience
+
+- **Redux Cart Management**: Add/remove items with state persistence
+- **Cart Counter**: Real-time item count in header
+- **Item Management**: Quantity controls and item removal
+- **Total Calculation**: Dynamic price calculation
+
+### 🎨 UI/UX Features
+
+- **Shimmer Loading**: Elegant loading states for better UX
+- **Lazy Loading**: Code splitting for optimal performance
+- **Accordion Components**: Collapsible content sections
+- **Context API**: User authentication and theme management
+- **Error Boundaries**: Graceful error handling
+
+### 🧪 Testing & Quality
+
+- **Comprehensive Test Suite**: 95%+ test coverage
+- **Component Testing**: Individual component unit tests
+- **Integration Testing**: User flow and interaction tests
+- **Mock Data**: Realistic test data for consistent testing
+- **Vitest + React Testing Library**: Modern testing stack
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 19
-- **Styling**: Tailwind CSS 4.1
-- **Build Tool**: Vite 7
-- **Routing**: React Router DOM
-- **API**: Swiggy API for live restaurant data
-- **Development**: ESLint for code quality
+### Frontend
+
+- **React 19.1.0** - Latest React with concurrent features
+- **Redux Toolkit** - State management with RTK
+- **React Router DOM** - Client-side routing
+- **TailwindCSS** - Utility-first CSS framework
+- **React Icons** - Comprehensive icon library
+
+### Development & Testing
+
+- **Vite** - Fast build tool and dev server
+- **Vitest** - Lightning fast unit testing
+- **React Testing Library** - Component testing utilities
+- **ESLint** - Code linting and formatting
+- **jsdom** - DOM testing environment
+
+### Build & Deployment
+
+- **Vite Build** - Optimized production builds
+- **Code Splitting** - Lazy loading for performance
+- **Hot Module Replacement** - Fast development experience
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourusername/FoodDeliver-App-React.git
+   cd FoodDeliver-App-React
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   ```
+   http://localhost:5173
+   ```
+
+### Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run preview      # Preview production build
+
+# Building
+npm run build        # Create production build
+npm run lint         # Run ESLint
+
+# Testing
+npm run test         # Run test suite
+npm run test:ui      # Run tests with UI interface
+```
 
 ## 📁 Project Structure
 
 ```
 src/
-├── components/
-│   ├── Header.jsx          # Navigation header with logo and menu
-│   ├── Body.jsx            # Main content area with search and restaurant list
-│   ├── RestaurantCard.jsx  # Individual restaurant card component
-│   ├── Footer.jsx          # Sticky footer with copyright info
-│   ├── Shimmer.jsx         # Loading skeleton for restaurant cards
-│   └── ShimmerContainer.jsx # Container for multiple shimmer cards
-├── pages/
-│   ├── Body.jsx            # Home page with restaurant listings
-│   ├── About.jsx           # About page
-│   └── Contact.jsx         # Contact page
-├── layouts/
-│   └── MainLayout.jsx      # Main layout wrapper with header/footer
-├── utils/
-│   ├── mockData.js         # Restaurant data and mock API responses
-│   └── comman.js           # Common constants and URLs
+├── components/          # Reusable UI components
+│   ├── Header.jsx      # Navigation header with cart
+│   ├── RestaurantCard.jsx  # Restaurant display card
+│   ├── CartItems.jsx   # Cart item management
+│   ├── MenuItem.jsx    # Menu item component
+│   ├── Shimmer.jsx     # Loading skeleton
+│   └── ...
+├── pages/              # Route-based page components
+│   ├── Body.jsx        # Home page with restaurants
+│   ├── RestMenu.jsx    # Restaurant menu page
+│   ├── Cart.jsx        # Shopping cart page
+│   └── ...
+├── utils/              # Utility functions and hooks
+│   ├── useOnlineStatus.js  # Online status hook
+│   ├── appStore.js     # Redux store configuration
+│   ├── cartSlice.js    # Cart state management
+│   └── ...
+├── tests/              # Test files
+│   ├── components/     # Component tests
+│   └── __mocks__/      # Mock data and functions
+├── mocks/              # Static mock data
+└── layouts/            # Layout components
 ├── App.jsx                 # Main application component with routing
 ├── index.css               # Global styles and shimmer animations
 └── main.jsx               # Application entry point
@@ -69,17 +194,20 @@ src/
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd FoodDeliver-App-React
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -96,15 +224,17 @@ npm run dev
 ## 🎨 Components Overview
 
 ### Header Component
+
 - Displays the FoodDeliver logo
 - Navigation menu with Home, About, Contact, and Cart links
 - Responsive design with proper spacing
 - Integrated with React Router for navigation
 
 ### Body Component
+
 - **Enhanced Search Bar**: Real-time restaurant filtering with instant results
 - **Top Rated Restaurant Filter**: Button to filter restaurants with 4.5+ star ratings
-- **Advanced State Management**: 
+- **Advanced State Management**:
   - Loading states with shimmer UI
   - Separate filtered and main restaurant lists
   - Search text state management
@@ -115,24 +245,28 @@ npm run dev
 - Responsive layout with search and filter controls
 
 ### RestaurantCard Component
+
 - Displays restaurant image from Swiggy CDN
 - Shows restaurant name, cuisine types, ratings, cost, and delivery time
 - Hover effects for better user interaction
 - Consistent styling with proper spacing
 
 ### Shimmer Components
+
 - **Shimmer.jsx**: Individual loading skeleton matching RestaurantCard structure
 - **ShimmerContainer.jsx**: Container displaying 12 shimmer cards
 - **Custom CSS Animation**: Smooth shimmer effect with gradient animation
 - **Responsive Design**: Matches actual card dimensions and layout
 
 ### Footer Component
+
 - **Sticky Footer**: Always stays at bottom of page
 - Dynamic copyright year
 - Consistent styling with site theme
 - Responsive layout for mobile and desktop
 
 ### Layout System
+
 - **MainLayout.jsx**: Flexbox-based layout ensuring footer stays at bottom
 - **Routing Integration**: Wraps all pages with consistent header/footer
 - **Responsive Container**: Proper spacing and mobile optimization
@@ -140,12 +274,14 @@ npm run dev
 ## 🚀 Key Features Explained
 
 ### Shimmer Loading UI
+
 - **Purpose**: Provides visual feedback while restaurant data loads
 - **Implementation**: CSS animations with gradient effects
 - **User Experience**: Reduces perceived loading time
 - **Responsive**: Adapts to different screen sizes
 
 ### Enhanced Search Functionality
+
 - **Real-time Filtering**: Results update as you type
 - **Case Insensitive**: Search works regardless of letter case
 - **State Management**: Maintains original data for filtering
@@ -153,12 +289,14 @@ npm run dev
 - **Clear Functionality**: Empty search restores full restaurant list
 
 ### API Integration
+
 - **Live Data**: Fetches real restaurant data from Swiggy API
 - **Error Handling**: Graceful fallback when API fails
 - **Loading States**: Proper loading indicators during data fetch
 - **Optional Chaining**: Safe data access preventing crashes
 
 ### Routing System
+
 - **React Router**: Multi-page navigation
 - **Layout Wrapper**: Consistent header/footer across pages
 - **404 Handling**: Proper error page for invalid routes
@@ -166,12 +304,15 @@ npm run dev
 ## 🔧 Customization
 
 ### Adding New Pages
+
 1. Create new component in `src/pages/`
 2. Add route in `App.jsx`
 3. Update navigation in `Header.jsx`
 
 ### Modifying Shimmer Animation
+
 Update the CSS in `src/index.css` to customize the shimmer effect:
+
 ```css
 .shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -181,9 +322,11 @@ Update the CSS in `src/index.css` to customize the shimmer effect:
 ```
 
 ### Styling
+
 The app uses Tailwind CSS. Modify classes in components or extend the Tailwind configuration for custom styling.
 
 ### Constants
+
 Update `src/utils/comman.js` to modify image URLs or other constants.
 
 ## 🤝 Contributing

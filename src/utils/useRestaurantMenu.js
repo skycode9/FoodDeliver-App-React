@@ -29,23 +29,10 @@ const useRestaurantMenu = (restId) => {
         console.error("Menu API failed, using mock data:", apiError);
       }
 
-      // Fallback to basic menu structure for demo
-      setMenuInfo({
-        cards: [
-          {
-            card: {
-              card: {
-                info: {
-                  name: "Demo Restaurant",
-                  cuisines: ["Indian", "Chinese"],
-                  avgRating: 4.2,
-                  costForTwoMessage: "₹300 for two",
-                },
-              },
-            },
-          },
-        ],
-      });
+      // Fallback to mock menu data
+      const { default: mockMenuData } = await import("../mocks/RestaurantMenuMockData.json");
+      console.log("Using mock menu data:", mockMenuData);
+      setMenuInfo(mockMenuData);
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -53,7 +40,7 @@ const useRestaurantMenu = (restId) => {
 
   useEffect(() => {
     fetchMenuData();
-  }, []);
+  }, [restId]);
 
   return menuInfo;
 };

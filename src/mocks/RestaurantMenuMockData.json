@@ -1,0 +1,387 @@
+{
+  "cards": [
+    {},
+    {},
+    {
+      "card": {
+        "card": {
+          "info": {
+            "id": "9862",
+            "name": "Pizza Hut",
+            "city": "Mumbai",
+            "slugs": {
+              "restaurant": "pizza-hut-bandra-kurla-complex-bandra",
+              "city": "mumbai"
+            },
+            "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2025/6/9/1b846766-8d71-449b-b1bc-116fc8c3a024_9862.JPG",
+            "locality": "Bandra",
+            "areaName": "Bandra Kurla Complex",
+            "costForTwo": "₹300 for two",
+            "costForTwoMessage": "₹300 for two",
+            "cuisines": ["Pizzas", "Italian", "Fast Food"],
+            "avgRating": 4.2,
+            "feeDetails": {
+              "restaurantId": "9862",
+              "fees": [
+                {
+                  "name": "BASE_DISTANCE",
+                  "fee": 3500
+                },
+                {
+                  "name": "BASE_TIME"
+                },
+                {
+                  "name": "ANCILLARY_SURGE_FEE"
+                }
+              ],
+              "totalFee": 3500
+            },
+            "parentId": "721",
+            "avgRatingString": "4.2",
+            "totalRatingsString": "16K+",
+            "sla": {
+              "deliveryTime": 30,
+              "lastMileTravel": 2.4,
+              "serviceability": "SERVICEABLE",
+              "slaString": "25-30 mins",
+              "lastMileTravelString": "2.4 km",
+              "iconType": "ICON_TYPE_EMPTY"
+            },
+            "availability": {
+              "nextCloseTime": "2025-08-26 03:00:00",
+              "opened": true
+            },
+            "isOpen": true,
+            "type": "F",
+            "badgesV2": {
+              "entityBadges": {
+                "imageBased": {},
+                "textBased": {},
+                "textExtendedBadges": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {},
+    {
+      "groupedCard": {
+        "cardGroupMap": {
+          "REGULAR": {
+            "cards": [
+              {
+                "card": {
+                  "card": {
+                    "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                    "title": "Recommended",
+                    "itemCards": [
+                      {
+                        "card": {
+                          "info": {
+                            "id": "101",
+                            "name": "Margherita Pizza",
+                            "category": "Pizzas",
+                            "description": "Classic delight with 100% real mozzarella cheese",
+                            "imageId": "pizza1",
+                            "isVeg": 1,
+                            "price": 29900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.5",
+                                "ratingCountV2": "250"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "card": {
+                          "info": {
+                            "id": "102",
+                            "name": "Pepperoni Pizza",
+                            "category": "Pizzas",
+                            "description": "Loaded with pepperoni and cheese",
+                            "imageId": "pizza2",
+                            "isVeg": 0,
+                            "price": 39900,
+                            "itemAttribute": {
+                              "vegClassifier": "NONVEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.7",
+                                "ratingCountV2": "380"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "card": {
+                          "info": {
+                            "id": "103",
+                            "name": "Farmhouse Pizza",
+                            "category": "Pizzas",
+                            "description": "Delightful combination of onion, capsicum, tomato & grilled mushroom",
+                            "imageId": "pizza3",
+                            "isVeg": 1,
+                            "price": 34900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.3",
+                                "ratingCountV2": "190"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "card": {
+                  "card": {
+                    "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                    "title": "Sides & Beverages",
+                    "itemCards": [
+                      {
+                        "card": {
+                          "info": {
+                            "id": "201",
+                            "name": "Garlic Breadsticks",
+                            "category": "Sides",
+                            "description": "Freshly baked garlic breadsticks with herbs",
+                            "imageId": "breadsticks1",
+                            "isVeg": 1,
+                            "price": 14900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.2",
+                                "ratingCountV2": "120"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "card": {
+                          "info": {
+                            "id": "202",
+                            "name": "Chicken Wings",
+                            "category": "Sides",
+                            "description": "Spicy chicken wings with special sauce",
+                            "imageId": "wings1",
+                            "isVeg": 0,
+                            "price": 24900,
+                            "itemAttribute": {
+                              "vegClassifier": "NONVEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.6",
+                                "ratingCountV2": "210"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "card": {
+                          "info": {
+                            "id": "203",
+                            "name": "Pepsi (500ml)",
+                            "category": "Beverages",
+                            "description": "Chilled Pepsi",
+                            "imageId": "pepsi1",
+                            "isVeg": 1,
+                            "price": 5900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "card": {
+                  "card": {
+                    "@type": "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory",
+                    "title": "Specialty Pizzas",
+                    "categories": [
+                      {
+                        "title": "Veg Specialty",
+                        "itemCards": [
+                          {
+                            "card": {
+                              "info": {
+                                "id": "301",
+                                "name": "Paneer Tikka Pizza",
+                                "category": "Specialty",
+                                "description": "Paneer tikka with onions and capsicum",
+                                "imageId": "paneer_pizza",
+                                "isVeg": 1,
+                                "price": 37900,
+                                "itemAttribute": {
+                                  "vegClassifier": "VEG"
+                                },
+                                "ratings": {
+                                  "aggregatedRating": {
+                                    "rating": "4.4",
+                                    "ratingCountV2": "165"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "card": {
+                              "info": {
+                                "id": "302",
+                                "name": "Mexican Green Wave",
+                                "category": "Specialty",
+                                "description": "Mexican herbs sprinkled on onion, capsicum, tomato & jalapeno",
+                                "imageId": "mexican_pizza",
+                                "isVeg": 1,
+                                "price": 35900,
+                                "itemAttribute": {
+                                  "vegClassifier": "VEG"
+                                },
+                                "ratings": {
+                                  "aggregatedRating": {
+                                    "rating": "4.1",
+                                    "ratingCountV2": "98"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "title": "Non-Veg Specialty",
+                        "itemCards": [
+                          {
+                            "card": {
+                              "info": {
+                                "id": "303",
+                                "name": "Chicken Supreme",
+                                "category": "Specialty",
+                                "description": "Loaded with chicken, onions and capsicum",
+                                "imageId": "chicken_supreme",
+                                "isVeg": 0,
+                                "price": 42900,
+                                "itemAttribute": {
+                                  "vegClassifier": "NONVEG"
+                                },
+                                "ratings": {
+                                  "aggregatedRating": {
+                                    "rating": "4.8",
+                                    "ratingCountV2": "420"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "card": {
+                              "info": {
+                                "id": "304",
+                                "name": "Chicken Sausage Pizza",
+                                "category": "Specialty",
+                                "description": "Chicken sausage with onions and herbs",
+                                "imageId": "sausage_pizza",
+                                "isVeg": 0,
+                                "price": 39900,
+                                "itemAttribute": {
+                                  "vegClassifier": "NONVEG"
+                                },
+                                "ratings": {
+                                  "aggregatedRating": {
+                                    "rating": "4.5",
+                                    "ratingCountV2": "275"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "card": {
+                  "card": {
+                    "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                    "title": "Desserts",
+                    "itemCards": [
+                      {
+                        "card": {
+                          "info": {
+                            "id": "401",
+                            "name": "Choco Lava Cake",
+                            "category": "Desserts",
+                            "description": "Warm chocolate cake with molten chocolate center",
+                            "imageId": "lava_cake",
+                            "isVeg": 1,
+                            "price": 11900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.7",
+                                "ratingCountV2": "340"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "card": {
+                          "info": {
+                            "id": "402",
+                            "name": "Brownie with Ice Cream",
+                            "category": "Desserts",
+                            "description": "Chocolate brownie topped with vanilla ice cream",
+                            "imageId": "brownie_icecream",
+                            "isVeg": 1,
+                            "price": 14900,
+                            "itemAttribute": {
+                              "vegClassifier": "VEG"
+                            },
+                            "ratings": {
+                              "aggregatedRating": {
+                                "rating": "4.6",
+                                "ratingCountV2": "285"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -15,6 +15,8 @@ const RestMenu = () => {
   const MenuInfo = useRestaurantMenu(restId);
   const MenuHeaderInfo = MenuInfo?.cards[2]?.card?.card?.info;
 
+  console.log("menuInfo", MenuInfo);
+
   // const MenuCategoryData =
   //   MenuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
   //     (card) =>
@@ -25,6 +27,8 @@ const RestMenu = () => {
   //   );
   const menuCategory =
     MenuInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+  console.log("menuCate", menuCategory);
+
   const MenuCategoryData = menuCategory?.filter((card) => {
     const type = card?.card?.card?.["@type"];
     return (
@@ -46,18 +50,18 @@ const RestMenu = () => {
   // Simple function to check if any items exist for selected filter
   const checkIfItemsExist = () => {
     if (!selected) return true; // No filter applied
-    
+
     let hasItems = false;
-    
+
     for (let i = 0; i < MenuCategoryData.length; i++) {
       const menu = MenuCategoryData[i];
-      
+
       if (menu?.card?.card?.categories) {
         // Check nested categories
         for (let j = 0; j < menu.card.card.categories.length; j++) {
           const category = menu.card.card.categories[j];
           const items = category?.itemCards || [];
-          
+
           for (let k = 0; k < items.length; k++) {
             const item = items[k];
             if (item?.card?.info?.itemAttribute?.vegClassifier === selected) {
@@ -80,7 +84,7 @@ const RestMenu = () => {
       }
       if (hasItems) break;
     }
-    
+
     return hasItems;
   };
 
@@ -127,16 +131,18 @@ const RestMenu = () => {
                   {selected === "VEG" ? "🥬" : "🍖"}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                  {selected === "VEG" ? "No Vegetarian Items" : "No Non-Vegetarian Items"}
+                  {selected === "VEG"
+                    ? "No Vegetarian Items"
+                    : "No Non-Vegetarian Items"}
                 </h3>
                 <p className="text-gray-500 text-center max-w-md">
-                  {selected === "VEG" 
-                    ? "This restaurant doesn't have any vegetarian dishes available." 
-                    : "This restaurant doesn't have any non-vegetarian dishes available."
-                  }
+                  {selected === "VEG"
+                    ? "This restaurant doesn't have any vegetarian dishes available."
+                    : "This restaurant doesn't have any non-vegetarian dishes available."}
                 </p>
                 <p className="text-sm text-gray-400 mt-2">
-                  Try switching to {selected === "VEG" ? "Non-Veg" : "Veg"} or clear the filter.
+                  Try switching to {selected === "VEG" ? "Non-Veg" : "Veg"} or
+                  clear the filter.
                 </p>
               </div>
             )}
@@ -144,48 +150,61 @@ const RestMenu = () => {
             {MenuCategoryData.map((menu, index) => {
               // Check if it's a nested menu
               const isNestedMenu = menu?.card?.card?.categories?.length > 0;
-              
+
               if (isNestedMenu) {
                 // For nested menus, check if any category has filtered items
-                const hasFilteredItems = menu?.card?.card?.categories?.some(category => {
-                  const categoryItems = category?.itemCards || [];
-                  const filteredCategoryItems = selected === null
-                    ? categoryItems
-                    : categoryItems.filter(item =>
-                        item?.card?.info?.itemAttribute?.vegClassifier === selected
-                      );
-                  return filteredCategoryItems.length > 0;
-                });
-                
+                const hasFilteredItems = menu?.card?.card?.categories?.some(
+                  (category) => {
+                    const categoryItems = category?.itemCards || [];
+                    const filteredCategoryItems =
+                      selected === null
+                        ? categoryItems
+                        : categoryItems.filter(
+                            (item) =>
+                              item?.card?.info?.itemAttribute?.vegClassifier ===
+                              selected
+                          );
+                    return filteredCategoryItems.length > 0;
+                  }
+                );
+
                 if (!hasFilteredItems) return null;
               } else {
                 // For simple menus
                 const itemCards = menu?.card?.card?.itemCards || [];
-                const filteredData = selected === null
-                  ? itemCards
-                  : itemCards.filter(item =>
-                      item?.card?.info?.itemAttribute?.vegClassifier === selected
-                    );
-                
+                const filteredData =
+                  selected === null
+                    ? itemCards
+                    : itemCards.filter(
+                        (item) =>
+                          item?.card?.info?.itemAttribute?.vegClassifier ===
+                          selected
+                      );
+
                 if (!filteredData || filteredData.length === 0) return null;
               }
 
               // Calculate menu length for display
-              const menuLength = isNestedMenu 
+              const menuLength = isNestedMenu
                 ? menu?.card?.card?.categories?.reduce((total, category) => {
                     const categoryItems = category?.itemCards || [];
-                    const filteredCategoryItems = selected === null
-                      ? categoryItems
-                      : categoryItems.filter(item =>
-                          item?.card?.info?.itemAttribute?.vegClassifier === selected
-                        );
+                    const filteredCategoryItems =
+                      selected === null
+                        ? categoryItems
+                        : categoryItems.filter(
+                            (item) =>
+                              item?.card?.info?.itemAttribute?.vegClassifier ===
+                              selected
+                          );
                     return total + filteredCategoryItems.length;
                   }, 0)
-                : (selected === null
-                    ? menu?.card?.card?.itemCards?.length || 0
-                    : menu?.card?.card?.itemCards?.filter(item =>
-                        item?.card?.info?.itemAttribute?.vegClassifier === selected
-                      )?.length || 0);
+                : selected === null
+                ? menu?.card?.card?.itemCards?.length || 0
+                : menu?.card?.card?.itemCards?.filter(
+                    (item) =>
+                      item?.card?.info?.itemAttribute?.vegClassifier ===
+                      selected
+                  )?.length || 0;
 
               return (
                 <div
@@ -208,11 +227,15 @@ const RestMenu = () => {
                   ) : (
                     <MenuItem
                       showItems={index === isOpen ? true : false}
-                      MenuSubData={selected === null
-                        ? menu?.card?.card?.itemCards
-                        : menu?.card?.card?.itemCards?.filter(item =>
-                            item?.card?.info?.itemAttribute?.vegClassifier === selected
-                          )}
+                      MenuSubData={
+                        selected === null
+                          ? menu?.card?.card?.itemCards
+                          : menu?.card?.card?.itemCards?.filter(
+                              (item) =>
+                                item?.card?.info?.itemAttribute
+                                  ?.vegClassifier === selected
+                            )
+                      }
                       selected={selected}
                     />
                   )}

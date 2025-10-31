@@ -8,12 +8,16 @@ const useRestaurantMenu = (restId) => {
     try {
       // Try API first, fallback to mock data if fails
       try {
-        const data = await fetch(MENU_URL + restId);
-        
+        console.log("ResURL", MENU_URL + restId);
+
+        const data = await fetch(`/api/menu` + restId);
+
+        console.log("data", data);
+
         if (!data.ok) {
-          throw new Error('Menu API failed');
+          throw new Error("Menu API failed");
         }
-        
+
         const json = await data.json();
         if (json.data) {
           setMenuInfo(json.data);
@@ -33,14 +37,13 @@ const useRestaurantMenu = (restId) => {
                   name: "Demo Restaurant",
                   cuisines: ["Indian", "Chinese"],
                   avgRating: 4.2,
-                  costForTwoMessage: "₹300 for two"
-                }
-              }
-            }
-          }
-        ]
+                  costForTwoMessage: "₹300 for two",
+                },
+              },
+            },
+          },
+        ],
       });
-      
     } catch (error) {
       console.log("Something went wrong", error);
     }

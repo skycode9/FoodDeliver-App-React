@@ -10,7 +10,7 @@ const useRestaurantMenu = (restId) => {
       try {
         console.log("ResURL", MENU_URL + restId);
 
-        const data = await fetch(`/api/menu` + restId);
+        const data = await fetch(`/api/menu?restaurantId=` + restId);
 
         console.log("data", data);
 

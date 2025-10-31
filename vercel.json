@@ -1,8 +1,8 @@
 {
-  "rewrites": [
-    {
-      "source": "/api/dapi/(.*)",
-      "destination": "https://www.swiggy.com/dapi/$1"
+  "functions": {
+    "api/menu.js": {
+      "memory": 1024,
+      "maxDuration": 10
     }
-  ]
+  }
 }

@@ -8,23 +8,25 @@ const useRestaurantMenu = (restId) => {
     try {
       // Try API first, fallback to mock data if fails
       try {
-        console.log("ResURL", MENU_URL + restId);
+        console.log("Fetching menu for restaurant:", restId);
 
-        const data = await fetch(`/api/menu?restaurantId=` + restId);
+        const response = await fetch(`/api/menu?restaurantId=${restId}`);
 
-        console.log("data", data);
+        console.log("Response status:", response.status);
 
-        if (!data.ok) {
-          throw new Error("Menu API failed");
+        if (!response.ok) {
+          throw new Error(`Menu API failed with status ${response.status}`);
         }
 
-        const json = await data.json();
+        const json = await response.json();
+        console.log("API Response:", json);
+        
         if (json.data) {
           setMenuInfo(json.data);
           return;
         }
       } catch (apiError) {
-        console.log("Menu API failed, using mock data:", apiError);
+        console.error("Menu API failed, using mock data:", apiError);
       }
 
       // Fallback to basic menu structure for demo
